@@ -51,10 +51,13 @@ copia antigua hasta que expire. `activate` borra las cachés con otro nombre.
 `.github/workflows/ci.yml` valida la sintaxis de los scripts, el manifiesto y que
 todo lo que precarga el service worker exista. Se ejecuta en cada push y PR.
 
-`.github/workflows/pages.yml` publica la raíz en GitHub Pages, pero solo si defines
-la variable de repositorio `PAGES_ENABLED` con valor `true` y Pages está activado
-(en un repositorio privado requiere un plan que lo permita). Si no lo está,
-publica la carpeta en cualquier hosting estático: no hay build ni dependencias.
+`.github/workflows/pages.yml` publica la raíz en GitHub Pages en cada push a `main`.
+
+App en vivo: https://redbloodfoxchaoseco-sys.github.io/alba-pwa/
+
+Requiere Pages activado con origen «GitHub Actions» y la variable de repositorio
+`PAGES_ENABLED` en `true`; sin ella el job se salta y no falla. Si prefieres otro
+hosting estático, basta con publicar la carpeta: no hay build ni dependencias.
 
 ## Licencia
 
