@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: for f in app.js modules.js albaGraph.js sw.js; do node --check "$f"; done
+      - name: Validate manifest and icons
+        run: |
+          node -e "
+          const fs=require('fs');
+          const m=require('./manifest.json');
+          if(!m.name||!m.start_url||!m.icons.length) throw new Error('manifest incomplete');
+          const missing=m.icons.filter(i=>!i.src.startsWith('data:')&&!fs.existsSync('./'+i.src));
+          if(missing.length) throw new Error('missing icons: '+missing.map(i=>i.src).join(', '));
+          console.log('manifest ok:', m.name, m.icons.length+' icons');
+          "
+      - name: Check service worker precache targets exist
+        run: |
+          node -e "
+          const fs=require('fs');
+          const src=fs.readFileSync('sw.js','utf8');
+          const assets=[...src.matchAll(/'\.\/([^']*)'/g)].map(m=>m[1]).filter(Boolean);
+          const missing=assets.filter(a=>!fs.existsSync(a.replace(/\/$/,'')));
+          if(missing.length) throw new Error('precache targets missing: '+missing.join(', '));
+          console.log('precache ok:', assets.length+' entries');
+          "

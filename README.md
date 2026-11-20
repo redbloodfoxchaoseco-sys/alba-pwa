@@ -48,10 +48,13 @@ copia antigua hasta que expire. `activate` borra las cachés con otro nombre.
 
 ## Despliegue
 
-`.github/workflows/pages.yml` publica la raíz en GitHub Pages en cada push a `main`.
-Pages en un repositorio privado requiere un plan que lo permita; si no está
-disponible, publica la carpeta en cualquier hosting estático: no hay build ni
-dependencias.
+`.github/workflows/ci.yml` valida la sintaxis de los scripts, el manifiesto y que
+todo lo que precarga el service worker exista. Se ejecuta en cada push y PR.
+
+`.github/workflows/pages.yml` publica la raíz en GitHub Pages, pero solo si defines
+la variable de repositorio `PAGES_ENABLED` con valor `true` y Pages está activado
+(en un repositorio privado requiere un plan que lo permita). Si no lo está,
+publica la carpeta en cualquier hosting estático: no hay build ni dependencias.
 
 ## Licencia
 
