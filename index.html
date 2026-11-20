@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0c15">
+<meta name="color-scheme" content="dark">
+<title>ALBA · Kaelen 7.2</title>
+<link rel="manifest" href="manifest.json">
+<meta name="description" content="ALBA · Kaelen 7.2 — diseño biomecánico y filosófico, instalable y offline">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar"><h1>🦊 ALBA · Especie Origen</h1><p class="sub">Kaelen 7.2 · Ingeniería Real y Modular</p></header>
+<nav class="tabs" id="tabs" role="tablist"></nav>
+<main class="content" id="content" role="tabpanel" tabindex="0"></main>
+<footer class="footer"><span id="status">🟢 Iniciando…</span><span>⏱ <span id="sessionTime">00:00:00</span></span></footer>
+
+<!-- Carga de scripts en orden de dependencia -->
+<script src="albaGraph.js"></script>
+<script src="modules.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
